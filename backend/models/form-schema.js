@@ -1,21 +1,54 @@
 import mongoose from 'mongoose';
 
-const formSchema = new mongoose.Schema({
-    name: {
+// Specifies an individual man
+const manSchema = new mongoose.Schema({
+    firstname: {
         type: String,
         required: true,
         trim: true,
-        minLength: 2,
+        minLength: 1,
         maxLength: 15,
         match: /^[A-Za-z]+$/
     },
-    msgText: {
+    problematic: {
+        type: Boolean,
+        required: true
+    },
+    reason: {
         type: String,
-        required: true,
-        trim: true,
-        minLength: 2,
-        maxLength: 30
+        required: false
     }
+
+})
+
+// Specifies a group of men - ex. family
+const groupSchema = new mongoose.Schema({
+    men: {
+        type: [manSchema]
+    }
+})
+
+const formSchema = new mongoose.Schema({
+    family: {
+        type: groupSchema,
+        required: false
+    },
+    extendedfamily: {
+        type: groupSchema,
+        required: false
+    },
+    closefriends: {
+        type: groupSchema,
+        required: false
+    },
+    friends: {
+        type: groupSchema,
+        required: false
+    },
+    acquaintances: {
+        type: groupSchema,
+        required: false
+    } 
 });
 
 formSchema.set('toJSON', {
