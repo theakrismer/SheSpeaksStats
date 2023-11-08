@@ -1,5 +1,5 @@
 # "Good" Man Calculator
-This exercise exists to generate awareness about the sheer volume of negative male behaviour, especially towards women. This tool aims to collect data about men in society, and to spread awareness of this inapropriate behaviour towards others. 
+This exercise exists to generate awareness about the sheer volume of negative male behaviour, especially towards women. This tool aims to collect data about men in society, and to spread awareness of any inapropriate behaviour towards others. 
 The goal is to both educate on the felt experiences of others, and to provide a way to identify men in your life who may be worth ending social relations with.
 
 ## How it works
