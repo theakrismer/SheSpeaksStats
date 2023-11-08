@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const formModel = mongoose.model("form");
 const personModel = mongoose.model("person")
 
+// Allows adding a new submission of men, and their relation to self
 const addNewSubmission = async (req, res) => {
     try {
       let message = await formModel.create(req.body);
