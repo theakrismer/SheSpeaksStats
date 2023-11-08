@@ -31,8 +31,4 @@ const addNewSubmission = async (req, res) => {
     }
   };
 
-  const addNewMan = async (req, res) => {
-
-  }
-
   export { addNewSubmission };
