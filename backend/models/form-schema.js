@@ -18,7 +18,6 @@ const manSchema = new mongoose.Schema({
         type: String,
         required: false
     }
-
 })
 
 // Specifies a group of men - ex. family
