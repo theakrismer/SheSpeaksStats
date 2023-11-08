@@ -10,3 +10,7 @@ The tool is quite simple, and can also be done on paper.
    * Note that extreme examples are not the only terms for disqualification; general harrasement of women, uncomfortable statements or political views may be used at your personal disgression.
      
 4. With the "problematic" men removed, think critically about who the remaining men are, how many you started with, and how many are now left over.
+
+## Project Plan
+* ### Create a front end for viewing stats about all user data collected
+* ### Create an interactive tool, allowing users to identify men in their lives as problematic/non-problematic
