@@ -12,12 +12,12 @@ The tool is quite simple, and can also be done on paper.
 4. With the "problematic" men removed, think critically about who the remaining men are, how many you started with, and how many are now left over.
 
 ## Project Plan
-### Create a front end for viewing stats about all user data collected
-We want users to be able see various stats. For example, stats like what percentage of men become problematic the more you know them. For example, the percent of problematic men as friends versus close friends, family, etc.
-The goal is to spread awareness of felt experiences of men on a large scale.
-### Create an interactive tool, allowing users to identify men in their lives as problematic/non-problematic
-We want users to be able to use our tool to quickly complete the exercise outlined above for themselves.
+### Create an interactive survey tool
+We want users to be able to use our tool to quickly complete the exercise outlined above for themselves--allowing users to identify men in their lives as problematic or non-problematic.
 #### Our tool should be able to...
 1. To create a list of men, flagging some as problematic.
 2. To divide this list into categories based on familiarity. (Family, friends, acquaintances, etc.)
 3. To categorize problematic behaviour, based on severity and type of behaviour.
+### Create a dashboard for viewing stats
+We want users to be able see various stats. For example, stats like what percentage of men become problematic the more you know them. For example, the percent of problematic men as friends versus close friends, family, etc.
+The goal is to spread awareness of felt experiences of men on a large scale.
