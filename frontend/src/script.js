@@ -2,7 +2,7 @@
 
 
 // This function is an example of a FETCH request sent to an API.
-// This will only work if you've got a local mongodb database running on port 3004,
+// This will only work if you've got a local mongodb database running on port 3004.
 
 // In order for this to work--you will need to allow CORS in your browser
 // See below for a plugin that lets you turn CORS on and off in chrome
