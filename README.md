@@ -21,3 +21,6 @@ We want users to be able to use our tool to quickly complete the exercise outlin
 ### Create a dashboard for viewing statistics.
 We want users to be able to see various stats. For example, statistics like the percentage of problematic behavior versus familiarity The greater the familiarity, how does the percentage of problematic men change?
 The goal is to spread awareness of the felt experiences of men on a large scale.
+
+### Google Docs Notes
+https://docs.google.com/document/d/1LXcCwpTJUDEjTEQ8IXeRgdmRTtt54Y1mnwOZtDtQ35A/edit?usp=sharing
