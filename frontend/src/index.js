@@ -14,11 +14,11 @@ function App() {
     const [activePage, setActivePage] = useState("stats");
     return (
       <>
+      
           <NavBar page={{activePage, setActivePage}}/>
           {activePage === "stats" ? <StatsDashboard activePage={activePage}/> : null}
           {activePage === "survey" ?  <SurveyForm/> : null}
           {activePage === "ourproject" ? <OurProject/> : null}
-                  
       </>
     );
   }

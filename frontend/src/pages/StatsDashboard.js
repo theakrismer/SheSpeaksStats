@@ -27,12 +27,12 @@ function StatsDashboard({ page }) {
   }, [])
 
   return (<>
-    <div className='container-md mx-auto mx-8 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
+    <div className='container-md mx-8 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       <p>Of all <span className='text-3xl italic'>{totalMen}</span> men tallied...</p>
       <p><span className='text-3xl italic'>{problemPercent * 100}%</span> <span className='text-sm'>({totalProblematic})</span> exhibited negative behaviour. </p>
     </div>
 
-    <div className='container-md mx-auto mx-8 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
+    <div className='container-md mx-8 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       <p>Respondents said <span className='italic text-3xl'>{largestProblematicGroup ? largestProblematicGroup.groupname : null}</span> had the highest percentage of problematic behaviour compared to other groups.</p>
       <p>Around <span className='italic text-3xl'>{largestProblematicGroup ? largestProblematicGroup.percentProblematic * 100 : null}%</span> <span className="text-sm">({largestProblematicGroup ? largestProblematicGroup.totalProblematic : null})</span> of {largestProblematicGroup ? largestProblematicGroup.groupname : null} exhibited poor behaviour.</p>
       { groupsOverview ? (

@@ -4,14 +4,14 @@ function OurProject() {
 
     return (
         <>
-            <div className='container-md mx-auto mx-8 p-5 rounded flex flex-col border justify-center my-5 py-5 text-white text-xl'>
+            <div className='container-md mx-8 p-5 rounded flex flex-col border justify-center my-5 py-5 text-white text-xl'>
                 <h1 className="text-3xl py-5">Our Project</h1>
                 <p>
                     This exercise exists to generate awareness about the sheer volume of negative male behavior, especially towards women. This tool aims to collect data about men in society and to spread awareness of any inappropriate behavior towards others. The goal is to educate others on the felt experiences of others and to provide a way to identify men in your life who may be worth ending social relations with.
                 </p>
             </div>
 
-            <div className='container-md mx-auto mx-8 p-5 rounded flex flex-col border justify-center my-5 py-5 text-white text-xl'>
+            <div className='container-md mx-8 p-5 rounded flex flex-col border justify-center my-5 py-5 text-white text-xl'>
                 <h1 className="text-3xl py-5">How our tool works</h1>
                 <p>
                     The tool is quite simple and can also be done on paper.</p>

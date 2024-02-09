@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
-  background-color: rgb(54, 49, 57);
+  /* background-color: rgb(25, 23, 27); */
+  background: linear-gradient(90deg, rgba(25,23,27,1) 0%, rgba(45,37,54,1) 100%);
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  transition: all 2s linear;
 }
