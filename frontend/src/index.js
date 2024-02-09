@@ -5,6 +5,7 @@ import './index.css';
 import StatsDashboard from './pages/StatsDashboard';
 import NavBar from './modules/NavBar';
 import SurveyForm from "./pages/SurveyForm";
+import OurProject from "./pages/OurProject";
 
 const API_URL = "http://127.0.0.1:3004/api"
 
@@ -14,7 +15,9 @@ function App() {
     return (
       <>
           <NavBar page={{activePage, setActivePage}}/>
-          {activePage === "stats" ? <StatsDashboard activePage={activePage}/> : <SurveyForm/>}
+          {activePage === "stats" ? <StatsDashboard activePage={activePage}/> : null}
+          {activePage === "survey" ?  <SurveyForm/> : null}
+          {activePage === "ourproject" ? <OurProject/> : null}
                   
       </>
     );
