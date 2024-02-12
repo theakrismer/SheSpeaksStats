@@ -1,6 +1,6 @@
 function NavBar({ page }) {
     return (
-        <div className="flex justify-evenly py-4 bg-gradient-to-bl from-slate-900 to-slate-600 text-white text-center text-2xl">
+        <div className="flex justify-evenly py-4 bg-gradient-to-bl bg-sky-500/10 text-white text-center text-2xl">
             <button 
             onClick={() => page.setActivePage("stats")}
             className={`border-2 ${page.activePage === "stats" ? "border-white cursor-default" : "border-transparent hover:border-white transition cursor-pointer"} p-2 rounded`}>

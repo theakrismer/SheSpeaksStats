@@ -5,9 +5,27 @@
 
 body {
   /* background-color: rgb(25, 23, 27); */
-  background: linear-gradient(90deg, rgba(25,23,27,1) 0%, rgba(45,37,54,1) 100%);
+  background: linear-gradient(45deg, rgba(25,23,27,1), rgb(38, 33, 43), rgb(27, 27, 39), rgb(31, 34, 46));
+  background-size: 400% 400%;
+	animation: gradient 30s ease infinite;
+	height: 100vh;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  transition: all 2s linear;
+}
+
+body {
+	
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
