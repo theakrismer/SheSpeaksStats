@@ -12,7 +12,7 @@ function AddPerson({ people }) {
         people.setPeopleData([...people.peopleData,
         {
             "group": group,
-            "problematic": problematic,
+            "problematic": problematic === "yes",
             "reason": reason,
             "nickname": nickname
         }
