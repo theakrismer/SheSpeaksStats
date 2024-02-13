@@ -7,22 +7,10 @@ const personModel = mongoose.model("person")
 // Allows adding a new submission of men, and their relation to self
 const addNewSubmission = async (req, res) => {
     try {
-      let message = await formModel.create(req.body);
-      res.status(201).send(req.body);
-
-      let menArray = [];
-      Object.entries(req.body).forEach(([group, groupValue]) => {
-        Object.entries(req.body[group].men).forEach(([person, personValue])=> {
-          menArray.push({
-            "group": group,
-            "reason": personValue.reason,
-            "problematic": personValue.problematic
-          })
-        })
-      })
-      console.log(menArray);
+      let menArray = req.body.men;
       await personModel.insertMany(menArray);
-      
+
+      res.status(201).send(req.body);
     } catch (err) {
       console.log(req.body);
       res.status(400).send(
