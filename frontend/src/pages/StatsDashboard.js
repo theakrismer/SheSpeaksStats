@@ -10,28 +10,35 @@ function StatsDashboard({ page }) {
   const [groupsOverview, setGroupsOverview] = useState();
   const [largestProblematicGroup, setLargestProblematicGroup] = useState();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const getStats = () => {
-    fetch(API_URL + "/stats/total-men").then(res => res.json()).then(data => setTotalMen(data));
-    fetch(API_URL + "/stats/problematic-percent").then(res => res.json()).then(data => setProblemPercent(data));
-    fetch(API_URL + "/stats/total-problematic-men").then(res => res.json()).then(data => setTotalProblematic(data));
-    fetch(API_URL + "/stats/groups-overview").then(res => res.json()).then(data => {
+    const p1 = fetch(API_URL + "/stats/total-men").then(res => res.json()).then(data => setTotalMen(data));
+    const p2 = fetch(API_URL + "/stats/problematic-percent").then(res => res.json()).then(data => setProblemPercent(data));
+    const p3 = fetch(API_URL + "/stats/total-problematic-men").then(res => res.json()).then(data => setTotalProblematic(data));
+    const p4 =fetch(API_URL + "/stats/groups-overview").then(res => res.json()).then(data => {
       setGroupsOverview(data);
       for (const [key, value] of Object.entries(data)) {
         if (value.mostProblematic == true) { setLargestProblematicGroup(value); }
       }
-    });
+    })
+    Promise.all([p1,p2,p3,p4]).then((values) => {
+      setIsLoading(setIsLoading(false));
+    })
   }
 
   useEffect(() => {
-    getStats();
+      getStats();
   }, [])
 
   return (<>
+  { isLoading ? null :
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       <p>Of all <span className='text-3xl italic'>{totalMen}</span> men tallied...</p>
       <p><span className='text-3xl italic'>{problemPercent * 100}%</span> <span className='text-sm'>({totalProblematic})</span> exhibited negative behaviour. </p>
-    </div>
+    </div>}
 
+    { isLoading ? null :
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       
       <p>Respondents said <span className='italic text-3xl'>{largestProblematicGroup ? largestProblematicGroup.groupname : null}</span> had the highest percentage of problematic behaviour compared to other groups.</p>
@@ -45,8 +52,9 @@ function StatsDashboard({ page }) {
           {groupsOverview.friends.mostProblematic ? null : <p className='capitalize'>{groupsOverview.friends.groupname}, {groupsOverview.friends.percentProblematic * 100}%</p>}
           {groupsOverview.acquaintances.mostProblematic ? null : <p className='capitalize'>{groupsOverview.acquaintances.groupname}, {groupsOverview.acquaintances.percentProblematic * 100}%</p>}
       </div>
-):null}
+      ):null}
     </div>
+    }
   </>
   );
 }
