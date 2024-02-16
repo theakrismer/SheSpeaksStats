@@ -1,4 +1,4 @@
-# "Good" Man Calculator
+# She Speaks Stats
 This exercise exists to generate awareness about the sheer volume of negative male behavior, especially towards women. This tool aims to collect data about men in society and to spread awareness of any inappropriate behavior towards others.
 The goal is to educate others on the felt experiences of others and to provide a way to identify men in your life who may be worth ending social relations with.
 
