@@ -33,12 +33,15 @@ function AddPerson({ people }) {
         setGroup("family");
         setProblematic(null);
         setReason("");
+        setStage(1);
     }
 
     const nextButton = (e) => {
         e.preventDefault();
         handleError();
         if(stage === 1 && nickname !== "")
+            setStage(stage + 1);
+        if(stage === 2 && group !== "")
             setStage(stage + 1);
 
         if(stage === 3 && problematic !== null)
