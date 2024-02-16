@@ -78,7 +78,7 @@ const getGroupStatistics = async (groupName) =>{
     groupProblematic = await personModel.find({"problematic":true, "group":groupName}).exec();
     if(allGroup.length == 0 || groupProblematic.length == 0)
       groupProblematicPercent = 0;
-    else groupProblematicPercent = allGroup.length / groupProblematic.length;
+    else groupProblematicPercent = groupProblematic.length / allGroup.length;
     return {"total": allGroup.length, "totalProblematic":groupProblematic.length, "percentProblematic":groupProblematicPercent};
 }
 

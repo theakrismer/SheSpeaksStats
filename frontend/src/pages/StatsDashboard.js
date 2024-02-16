@@ -35,22 +35,22 @@ function StatsDashboard({ page }) {
   { isLoading ? <p>Loading . . .</p> :
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       <p>Of all <span className='text-3xl italic'>{totalMen}</span> men tallied...</p>
-      <p><span className='text-3xl italic'>{problemPercent * 100}%</span> <span className='text-sm'>({totalProblematic})</span> exhibited negative behaviour. </p>
+      <p><span className='text-3xl italic'>{(problemPercent * 100).toFixed(2)}%</span> <span className='text-sm'>({totalProblematic})</span> exhibited negative behaviour. </p>
     </div>}
 
     { isLoading ? null :
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       
       <p>Respondents said <span className='italic text-3xl'>{largestProblematicGroup ? largestProblematicGroup.groupname : null}</span> had the highest percentage of problematic behaviour compared to other groups.</p>
-      <p>Around <span className='italic text-3xl'>{largestProblematicGroup ? largestProblematicGroup.percentProblematic * 100 : null}%</span> <span className="text-sm">({largestProblematicGroup ? largestProblematicGroup.totalProblematic : null})</span> of {largestProblematicGroup ? largestProblematicGroup.groupname : null} exhibited poor behaviour.</p>
+      <p>Around <span className='italic text-3xl'>{largestProblematicGroup ? (largestProblematicGroup.percentProblematic * 100).toFixed(2) : null}%</span> <span className="text-sm">({largestProblematicGroup ? largestProblematicGroup.totalProblematic : null})</span> of {largestProblematicGroup ? largestProblematicGroup.groupname : null} exhibited poor behaviour.</p>
       { groupsOverview ? (
       <div className='my-5 text-sm'>
         <p className='font-bold text-lg'>As compared to...</p>
-          {groupsOverview.family.mostProblematic ? null : <p className='capitalize'>{groupsOverview.family.groupname}, {groupsOverview.family.percentProblematic * 100}%</p> }
-          {groupsOverview.extendedfamily.mostProblematic ? null : <p className='capitalize'>{groupsOverview.extendedfamily.groupname}, {groupsOverview.extendedfamily.percentProblematic * 100}%</p>}
-          {groupsOverview.closefriends.mostProblematic ? null : <p className='capitalize'>{groupsOverview.closefriends.groupname}, {groupsOverview.closefriends.percentProblematic * 100}%</p>}
-          {groupsOverview.friends.mostProblematic ? null : <p className='capitalize'>{groupsOverview.friends.groupname}, {groupsOverview.friends.percentProblematic * 100}%</p>}
-          {groupsOverview.acquaintances.mostProblematic ? null : <p className='capitalize'>{groupsOverview.acquaintances.groupname}, {groupsOverview.acquaintances.percentProblematic * 100}%</p>}
+          {groupsOverview.family.mostProblematic ? null : <p className='capitalize'>{groupsOverview.family.groupname}, {(groupsOverview.family.percentProblematic * 100).toFixed(2)}%</p> }
+          {groupsOverview.extendedfamily.mostProblematic ? null : <p className='capitalize'>{groupsOverview.extendedfamily.groupname}, {(groupsOverview.extendedfamily.percentProblematic * 100).toFixed(2)}%</p>}
+          {groupsOverview.closefriends.mostProblematic ? null : <p className='capitalize'>{groupsOverview.closefriends.groupname}, {(groupsOverview.closefriends.percentProblematic * 100).toFixed(2)}%</p>}
+          {groupsOverview.friends.mostProblematic ? null : <p className='capitalize'>{groupsOverview.friends.groupname}, {(groupsOverview.friends.percentProblematic * 100).toFixed(2)}%</p>}
+          {groupsOverview.acquaintances.mostProblematic ? null : <p className='capitalize'>{groupsOverview.acquaintances.groupname}, {(groupsOverview.acquaintances.percentProblematic * 100).toFixed(2)}%</p>}
       </div>
       ):null}
     </div>
