@@ -59,7 +59,7 @@ function AddPerson({ people }) {
             {
                 stage === 1 ? (
                 <div>
-                    <label htmlFor="nickname">What's a nickname we can use for this person?</label><br />
+                    <label htmlFor="nickname">What's a nickname we can use for this man?</label><br />
                     <input className="bg-gray-700 p-1 m-2" type="text" id="nickname" name="nickname" value={nickname} onChange={e => setNickname(e.target.value)} /><br />
                     <p className="text-sm italic">Nicknames are not saved on our servers.</p>
                 </div>
@@ -69,7 +69,7 @@ function AddPerson({ people }) {
             {
                 stage === 2 ? (
                     <div>
-                    <label htmlFor="group">What is your relationship with this person?</label><br />
+                    <label htmlFor="group">What is your relationship with this man?</label><br />
                     <select className="bg-transparent border-b-4 focus:outline-none" name="group" id="group" value={group} onChange={e => setGroup(e.target.value)}>
                         <option className="bg-gray-700" value="family">Family</option>
                         <option className="bg-gray-700" value="extendedfamily">Extended Family</option>
@@ -83,7 +83,7 @@ function AddPerson({ people }) {
             {
                 stage === 3 ? (
                     <div>
-                    <label>Has this person exhibted problematic behavior of any kind?</label><br />
+                    <label>Has this man exhibted problematic behavior of any kind?</label><br />
 
                     <span className="mx-5"><label htmlFor="problematic_no">No </label> 
                     <input type="radio" onChange={e => setProblematic(e.target.value)} value="no" id="problematic_no" name="problematic_no" checked={problematic==="no"} />
