@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // connect to locally running MongoDB instance
-let dbURI = 'mongodb://localhost:27017/userData';
+let dbURI = process.env.ATLAS_URI    //'mongodb://localhost:27017/userData';
 mongoose.set('strictQuery', true);
 mongoose.connect(dbURI);
 
