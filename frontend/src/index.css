@@ -5,9 +5,9 @@
 
 body {
   /* background-color: rgb(25, 23, 27); */
-  background: linear-gradient(45deg, rgba(25,23,27,1), rgb(38, 33, 43), rgb(27, 27, 39), rgb(31, 34, 46));
+  background: linear-gradient(45deg, rgba(25,23,27,1), rgb(38, 33, 43), rgb(27, 27, 39), rgb(31, 34, 46),rgb(42, 47, 69));
   background-size: 400% 400%;
-	animation: gradient 30s ease infinite;
+	animation: gradient 35s ease infinite;
 	height: 100vh;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
