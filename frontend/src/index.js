@@ -7,7 +7,9 @@ import NavBar from './modules/NavBar';
 import SurveyForm from "./pages/SurveyForm";
 import OurProject from "./pages/OurProject";
 
-const API_URL = process.env.API_URL //"http://127.0.0.1:3004/api"
+// const API_URL = "http://127.0.0.1:3004/api"
+// const API_URL = "https://she-speaks-stats-backend.vercel.app/api" 
+const API_URL = process.env.API_URL 
 
 function App() {
 
