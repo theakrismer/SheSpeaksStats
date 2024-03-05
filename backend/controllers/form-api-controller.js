@@ -8,6 +8,7 @@ const personModel = mongoose.model("person")
 const addNewSubmission = async (req, res) => {
     try {
       let menArray = req.body.men;
+      let subInfo = req.body.submission;
       await personModel.insertMany(menArray);
 
       res.status(201).send(req.body);
