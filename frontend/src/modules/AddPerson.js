@@ -10,42 +10,48 @@ function AddPerson({ people }) {
     // const [problematic, setProblematic] = useState(null);
     // const [reason, setReason] = useState("");
     // const [stage, setStage] = useState(1);
-    // const [error, setError] = useState("");
+    const [error, setError] = useState("");
 
     const handleError = () => {
 
-    //     setError("");
-    //     if (stage == 4 && reason === "") { setError("Please provide a reason.") }
-    //     if (stage == 1 && nickname === "") { setError("Please provide a reason.") }
-    //     if (stage == 3 && problematic === null) setError("Please select an option.")
+        setError("");
+        //     if (stage == 4 && reason === "") { setError("Please provide a reason.") }
+        //     if (stage == 1 && nickname === "") { setError("Please provide a reason.") }
+        //     if (stage == 3 && problematic === null) setError("Please select an option.")
+        if (nickname === "") { setError("Please enter a nickname.") }
     }
 
     const getGroupDisplayName = (group) => {
         let displayName;
         GROUPS.forEach(element => {
-            if (element.id === group) 
-                displayName =  element.displayname
+            if (element.id === group)
+                displayName = element.displayname
         })
         return displayName;
     }
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         handleError();
-        const groupDisplayName = getGroupDisplayName(group);
+        if (error !== "" || nickname === "") return
+        else{
+            const groupDisplayName = getGroupDisplayName(group);
 
-        people.setPeopleData([...people.peopleData,
-        {
-            "group": group,
-            // "problematic": problematic === "yes",
-            // "reason": reason,
-            "nickname": nickname,
-            "groupDisplayName": groupDisplayName
+            people.setPeopleData([...people.peopleData,
+            {
+                "group": group,
+                // "problematic": problematic === "yes",
+                // "reason": reason,
+                "nickname": nickname,
+                "groupDisplayName": groupDisplayName
+            }
+            ])
+            setNickname("");
+            //setGroup("family"); // reset back to default
         }
-        ])
-        setNickname("");
-        setGroup("family");
+
+        
         // setProblematic(null);
         // setReason("");
         // setStage(1);
@@ -69,18 +75,25 @@ function AddPerson({ people }) {
 
     return (
         <div className="container-md mx-8 p-5 text-center rounded flex flex-col border justify-center my-5 py-5 text-white text-xl">
+            <p className="text-3xl my-5 font-bold italic">Add men</p>
+            <div className="p-3 w-8/12 text-center self-center">
+                <p>In this step, identify all the men you know and their relationship to you.</p><br /><p>Try to be as complete as possible, adding everyone you can think of.</p>
+                <br />
+                <hr />
+            </div>
             <form onSubmit={handleSubmit}>
 
-
+            <div className="flex flex-row justify-evenly">
                 <div className="my-5">
-                    <label htmlFor="nickname">What's a nickname we can use for this man?</label><br />
+                    <label htmlFor="nickname">Nickname</label><br />
                     <input className="bg-gray-700 p-1 m-2" type="text" id="nickname" name="nickname" value={nickname} onChange={e => setNickname(e.target.value)} /><br />
                     <p className="text-sm italic">Nicknames are not saved on our servers.</p>
+                    <p className="text-red-500 italic">{error}</p>
                 </div>
 
 
-                <div className="my-10   ">
-                    <label htmlFor="group">What is your relationship with this man?</label><br />
+                <div className="my-10">
+                    <label htmlFor="group">Relationship</label><br />
                     <select className="bg-transparent border-b-4 focus:outline-none" name="group" id="group" value={group} onChange={e => setGroup(e.target.value)}>
                         <option className="bg-gray-700" value="family">Family</option>
                         <option className="bg-gray-700" value="extendedfamily">Extended Family</option>
@@ -89,9 +102,9 @@ function AddPerson({ people }) {
                         <option className="bg-gray-700" value="acquaintances">Acquaintances</option>
                     </select><br />
                 </div>
-                
+                </div>
 
-                <input className="border m-5 p-1 hover:bg-green-900 rounded transition" type="submit" value="Add Person"/>
+                <input className="border m-5 p-1 hover:bg-green-900 rounded transition" type="submit" value="Add Person" />
                 <PeopleListLight people={people}/>
 
 
@@ -127,10 +140,10 @@ function AddPerson({ people }) {
                     //     }
 
                     //     </div>
-                
-                // <div>
-                //     <p className="text-sm italic text-red-600">{error}</p>
-                // </div>
+
+                    // <div>
+                    //     <p className="text-sm italic text-red-600">{error}</p>
+                    // </div>
                 }
 
             </form>
