@@ -14,7 +14,7 @@ function SurveyForm() {
 
   // Three states for data submission; filling, submitting, finished
   const [submitting, setSubmitting] = useState("filling");
-  const [age, setAge] = useState();
+  const [age, setAge] = useState("");
   const [peopleData, setPeopleData] = useState([]);
 
   const [stage, setStage] = useState(1);
