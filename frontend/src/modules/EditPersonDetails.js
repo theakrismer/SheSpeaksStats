@@ -1,46 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function EditPersonDetails({ people }) {
 
     const GROUPS = [{ "id": "family", "displayname": "Family" }, { "id": "extendedfamily", "displayname": "Extended Family" }, { "id": "closefriends", "displayname": "Close Friends" }, { "id": "friends", "displayname": "Friends" }, { "id": "acquaintances", "displayname": "Acquaintances" }];
-    const [problematic, setProblematic] = useState(null);
     const [personIndex, setPersonIndex] = useState(0);
     const [reason, setReason] = useState("");
     const [error, setError] = useState("");
+    const [problematic, setProblematic] = useState(false);
 
     const handleError = () => {
         setError("");
     }
 
     const changePerson = (e) => {
-        setProblematic(e.target.value);
-        let temp = people.peopleData;
+        setProblematic(e.target.value === "yes");
+        let temp = [...people.peopleData];
         temp[personIndex].problematic = e.target.value;
-        console.log(temp);
         people.setPeopleData(temp);
+        // checkProblematic();
     }
 
+    const checkProblematic = () => {
+        if(people && people.peopleData[personIndex].problematic === "yes")
+            setProblematic(true);
+        else if (people && people.peopleData[personIndex].problematic === "no")
+            setProblematic(false);
+    }
+    
 
+    useEffect(() => {
+        // Update problematic state based on the problematic property of the current person
+        if (people && people.peopleData[personIndex]) {
+            setProblematic(people.peopleData[personIndex].problematic === "yes");
+        }
+    }, [personIndex, people]);
 
     const incrementPersonIndex = (e) => {
         e.preventDefault();
         console.log(personIndex);
         if( people && personIndex < people.peopleData.length - 1 && people.peopleData[personIndex].problematic){
-            console.log("PERSON INDEX: " + personIndex);
             setPersonIndex(personIndex + 1);
         }
+        checkProblematic();
     }
 
     const decrementPersonIndex = (e) => {
         e.preventDefault();
         console.log(personIndex);
         if( people && personIndex > 0){
-            console.log("PERSON INDEX: " + personIndex);
             setPersonIndex(personIndex - 1);
         }
+        checkProblematic();
     }
 
-    console.log(people.peopleData);
+    // console.log(people.peopleData);
 
     return (
         <div className="container-md mx-8 p-5 text-center rounded flex flex-col border justify-center my-5 py-5 text-white text-xl">
@@ -57,15 +70,15 @@ function EditPersonDetails({ people }) {
                     <label>Have they exhibted problematic behavior?</label><br />
 
                     <span className="mx-5"><label htmlFor="problematic_no">No </label>
-                        <input type="radio" onChange={changePerson} value="no" id="problematic_no" name="problematic_no" checked={people && people.peopleData[personIndex].problematic === "no"} />
+                        <input type="radio" onChange={changePerson} value="no" id="problematic_no" name="problematic_no" checked={!problematic} />
                     </span>
 
                     <span className="mx-5"><label htmlFor="problematic_yes">Yes </label>
-                        <input type="radio" onChange={changePerson} value="yes" id="problematic_yes" name="problematic_yes" checked={people && people.peopleData[personIndex].problematic === "yes"} />
+                        <input type="radio" onChange={changePerson} value="yes" id="problematic_yes" name="problematic_yes" checked={problematic} />
                     </span>
                 </div>
 
-                {problematic === "yes" ? <div className="m-5">
+                {people && people.peopleData[personIndex].problematic === "yes" ? <div className="m-5">
                     <label htmlFor="reason">What kind?</label><br />
                     <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={e => setReason(e.target.value)} /><br />
                 </div> : null}
