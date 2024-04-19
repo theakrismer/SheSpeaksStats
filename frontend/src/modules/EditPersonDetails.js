@@ -6,19 +6,21 @@ function EditPersonDetails({ people }) {
     const [personIndex, setPersonIndex] = useState(0);
     const [reason, setReason] = useState("");
     const [error, setError] = useState("");
-    const [problematic, setProblematic] = useState(false);
+    const [problematic, setProblematic] = useState(undefined);
 
     const handleError = () => {
         setError("");
     }
 
-    const changePerson = (e) => {
+    // Change peopleData when problematic is updated
+    const changeProblematic = (e) => {
         setProblematic(e.target.value === "yes");
         let temp = [...people.peopleData];
         temp[personIndex].problematic = e.target.value;
         people.setPeopleData(temp);
     }
 
+    // Change peopleData when the reason is updated
     const changeProblemReason = (e) => {
         setReason(e.target.value);
         let temp = [...people.peopleData];
@@ -27,26 +29,33 @@ function EditPersonDetails({ people }) {
 
     }
 
+    // Reset problematic and reason when the peopleData or the index changes
     useEffect(() => {
         if (people && people.peopleData[personIndex]) {
-            setProblematic(people.peopleData[personIndex].problematic === "yes");
+            // Prevent problematic from being set unless it is set in peopleData
+            if (people.peopleData[personIndex].problematic && people.peopleData[personIndex].problematic.length > 0){
+                setProblematic(people.peopleData[personIndex].problematic === "yes");
+            }
+                
             setReason(people.peopleData[personIndex].reason);
         }
     }, [personIndex, people]);
 
+    // Increment the person being edited
     const incrementPersonIndex = (e) => {
         e.preventDefault();
-        console.log(personIndex);
         if( people && personIndex < people.peopleData.length - 1 && people.peopleData[personIndex].problematic){
             setPersonIndex(personIndex + 1);
+            setProblematic(undefined); // Reset problematic to nothing
         }
     }
 
+    // Decrement the person being edited
     const decrementPersonIndex = (e) => {
         e.preventDefault();
-        console.log(personIndex);
         if( people && personIndex > 0){
             setPersonIndex(personIndex - 1);
+            setProblematic(undefined); // Reset problematic to nothing
         }
     }
 
@@ -65,11 +74,11 @@ function EditPersonDetails({ people }) {
                     <label>Have they exhibted problematic behavior?</label><br />
 
                     <span className="mx-5"><label htmlFor="problematic_no">No </label>
-                        <input type="radio" onChange={changePerson} value="no" id="problematic_no" name="problematic_no" checked={!problematic} />
+                        <input type="radio" onChange={changeProblematic} value="no" id="problematic_no" name="problematic_no" checked={problematic === false} />
                     </span>
 
                     <span className="mx-5"><label htmlFor="problematic_yes">Yes </label>
-                        <input type="radio" onChange={changePerson} value="yes" id="problematic_yes" name="problematic_yes" checked={problematic} />
+                        <input type="radio" onChange={changeProblematic} value="yes" id="problematic_yes" name="problematic_yes" checked={problematic === true} />
                     </span>
                 </div>
 
@@ -88,8 +97,10 @@ function EditPersonDetails({ people }) {
             onClick={decrementPersonIndex}
             >	Previous Person</button> : null}
             
-            {personIndex !== people.peopleData.length - 1 ? <button className="border m-5 p-1 hover:bg-green-900 rounded transition"
+            {personIndex !== people.peopleData.length - 1 ? ((problematic === true && reason && reason.length > 0) || problematic === false) ? <button className="border m-5 p-1 hover:bg-green-900 rounded transition"
             onClick={incrementPersonIndex}
+            >Next Person</button> : <button className="border m-5 p-1 bg-gray-600 rounded transition"
+            disabled
             >Next Person</button> : null}
 
             </div>
