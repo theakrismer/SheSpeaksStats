@@ -1,9 +1,8 @@
 import { useState } from "react";
 import PeopleListLight from "./PeopleListLight";
+import { getGroupDisplayName } from "../pages/SurveyForm";
 
 function AddPerson({ people }) {
-
-    const GROUPS = [{ "id": "family", "displayname": "Family" }, { "id": "extendedfamily", "displayname": "Extended Family" }, { "id": "closefriends", "displayname": "Close Friends" }, { "id": "friends", "displayname": "Friends" }, { "id": "acquaintances", "displayname": "Acquaintances" }];
 
     const [nickname, setNickname] = useState("");
     const [group, setGroup] = useState("family");
@@ -15,22 +14,12 @@ function AddPerson({ people }) {
         if (nickname === "") { setError("Please enter a nickname.") }
     }
 
-    // Helper function, returns the human readable format of a group
-    const getGroupDisplayName = (group) => {
-        let displayName;
-        GROUPS.forEach(element => {
-            if (element.id === group)
-                displayName = element.displayname
-        })
-        return displayName;
-    }
-
     // Add the initial person to peopleData
     const handleSubmit = (e) => {
         e.preventDefault();
         handleError();
         if (error !== "" || nickname === "") return
-        else{
+        else {
             const groupDisplayName = getGroupDisplayName(group);
             people.setPeopleData([...people.peopleData,
             {
@@ -53,29 +42,29 @@ function AddPerson({ people }) {
             </div>
             <form onSubmit={handleSubmit}>
 
-            <div className="flex flex-row justify-evenly">
-                <div className="my-5">
-                    <label htmlFor="nickname">Nickname</label><br />
-                    <input className="bg-gray-700 p-1 m-2" type="text" id="nickname" name="nickname" value={nickname} onChange={e => setNickname(e.target.value)} /><br />
-                    <p className="text-sm italic">Nicknames are not saved on our servers.</p>
-                    <p className="text-red-500 italic">{error}</p>
-                </div>
+                <div className="flex flex-row justify-evenly">
+                    <div className="my-5">
+                        <label htmlFor="nickname">Nickname</label><br />
+                        <input className="bg-gray-700 p-1 m-2" type="text" id="nickname" name="nickname" value={nickname} onChange={e => setNickname(e.target.value)} /><br />
+                        <p className="text-sm italic">Nicknames are not saved on our servers.</p>
+                        <p className="text-red-500 italic">{error}</p>
+                    </div>
 
 
-                <div className="my-10">
-                    <label htmlFor="group">Relationship</label><br />
-                    <select className="bg-transparent border-b-4 focus:outline-none" name="group" id="group" value={group} onChange={e => setGroup(e.target.value)}>
-                        <option className="bg-gray-700" value="family">Family</option>
-                        <option className="bg-gray-700" value="extendedfamily">Extended Family</option>
-                        <option className="bg-gray-700" value="closefriends">Close Friends</option>
-                        <option className="bg-gray-700" value="friends">Friends</option>
-                        <option className="bg-gray-700" value="acquaintances">Acquaintances</option>
-                    </select><br />
-                </div>
+                    <div className="my-10">
+                        <label htmlFor="group">Relationship</label><br />
+                        <select className="bg-transparent border-b-4 focus:outline-none" name="group" id="group" value={group} onChange={e => setGroup(e.target.value)}>
+                            <option className="bg-gray-700" value="family">Family</option>
+                            <option className="bg-gray-700" value="extendedfamily">Extended Family</option>
+                            <option className="bg-gray-700" value="closefriends">Close Friends</option>
+                            <option className="bg-gray-700" value="friends">Friends</option>
+                            <option className="bg-gray-700" value="acquaintances">Acquaintances</option>
+                        </select><br />
+                    </div>
                 </div>
 
                 <input className="border m-5 p-1 hover:bg-green-900 rounded transition" type="submit" value="Add Person" />
-                <PeopleListLight people={people}/>
+                <PeopleListLight people={people} />
 
             </form>
         </div>

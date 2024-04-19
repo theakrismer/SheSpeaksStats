@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 
 function EditPersonDetails({ people }) {
 
-    const GROUPS = [{ "id": "family", "displayname": "Family" }, { "id": "extendedfamily", "displayname": "Extended Family" }, { "id": "closefriends", "displayname": "Close Friends" }, { "id": "friends", "displayname": "Friends" }, { "id": "acquaintances", "displayname": "Acquaintances" }];
     const [personIndex, setPersonIndex] = useState(0);
     const [reason, setReason] = useState("");
-    const [error, setError] = useState("");
     const [problematic, setProblematic] = useState(undefined);
 
-    const handleError = () => {
-        setError("");
-    }
+    // Future error handling implementation
+    // const [error, setError] = useState("");
+    // Stub: future error handling
+    // const handleError = () => {
+    //     setError("");
+    //     console.log(error);
+    // }
 
     // Change peopleData when problematic is updated
     const changeProblematic = (e) => {
@@ -33,10 +35,10 @@ function EditPersonDetails({ people }) {
     useEffect(() => {
         if (people && people.peopleData[personIndex]) {
             // Prevent problematic from being set unless it is set in peopleData
-            if (people.peopleData[personIndex].problematic && people.peopleData[personIndex].problematic.length > 0){
+            if (people.peopleData[personIndex].problematic && people.peopleData[personIndex].problematic.length > 0) {
                 setProblematic(people.peopleData[personIndex].problematic === "yes");
             }
-                
+
             setReason(people.peopleData[personIndex].reason);
         }
     }, [personIndex, people]);
@@ -44,7 +46,7 @@ function EditPersonDetails({ people }) {
     // Increment the person being edited
     const incrementPersonIndex = (e) => {
         e.preventDefault();
-        if( people && personIndex < people.peopleData.length - 1 && people.peopleData[personIndex].problematic){
+        if (people && personIndex < people.peopleData.length - 1 && people.peopleData[personIndex].problematic) {
             setPersonIndex(personIndex + 1);
             setProblematic(undefined); // Reset problematic to nothing
         }
@@ -53,7 +55,7 @@ function EditPersonDetails({ people }) {
     // Decrement the person being edited
     const decrementPersonIndex = (e) => {
         e.preventDefault();
-        if( people && personIndex > 0){
+        if (people && personIndex > 0) {
             setPersonIndex(personIndex - 1);
             setProblematic(undefined); // Reset problematic to nothing
         }
@@ -69,23 +71,23 @@ function EditPersonDetails({ people }) {
             </div>
             <form>
                 <div className="flex flex-col justify-center">
-                <div className="m-5">
-                    <p className="font-bold text-2xl">{people ? people.peopleData[personIndex].nickname : null} - {people ? people.peopleData[personIndex].groupDisplayName : null}</p>
-                    <label>Have they exhibted problematic behavior?</label><br />
+                    <div className="m-5">
+                        <p className="font-bold text-2xl">{people ? people.peopleData[personIndex].nickname : null} - {people ? people.peopleData[personIndex].groupDisplayName : null}</p>
+                        <label>Have they exhibted problematic behavior?</label><br />
 
-                    <span className="mx-5"><label htmlFor="problematic_no">No </label>
-                        <input type="radio" onChange={changeProblematic} value="no" id="problematic_no" name="problematic_no" checked={problematic === false} />
-                    </span>
+                        <span className="mx-5"><label htmlFor="problematic_no">No </label>
+                            <input type="radio" onChange={changeProblematic} value="no" id="problematic_no" name="problematic_no" checked={problematic === false} />
+                        </span>
 
-                    <span className="mx-5"><label htmlFor="problematic_yes">Yes </label>
-                        <input type="radio" onChange={changeProblematic} value="yes" id="problematic_yes" name="problematic_yes" checked={problematic === true} />
-                    </span>
-                </div>
+                        <span className="mx-5"><label htmlFor="problematic_yes">Yes </label>
+                            <input type="radio" onChange={changeProblematic} value="yes" id="problematic_yes" name="problematic_yes" checked={problematic === true} />
+                        </span>
+                    </div>
 
-                {people && people.peopleData[personIndex].problematic === "yes" ? <div className="m-5">
-                    <label htmlFor="reason">What kind?</label><br />
-                    <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={changeProblemReason} /><br />
-                </div> : null}
+                    {people && people.peopleData[personIndex].problematic === "yes" ? <div className="m-5">
+                        <label htmlFor="reason">What kind?</label><br />
+                        <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={changeProblemReason} /><br />
+                    </div> : null}
 
                 </div>
 
@@ -93,15 +95,15 @@ function EditPersonDetails({ people }) {
 
             </form>
             <div className="display flex flex-row justify-center">
-            {personIndex !== 0 ? <button className="border m-5 p-1 hover:bg-yellow-900 rounded transition"
-            onClick={decrementPersonIndex}
-            >	Previous Person</button> : null}
-            
-            {personIndex !== people.peopleData.length - 1 ? ((problematic === true && reason && reason.length > 0) || problematic === false) ? <button className="border m-5 p-1 hover:bg-green-900 rounded transition"
-            onClick={incrementPersonIndex}
-            >Next Person</button> : <button className="border m-5 p-1 bg-gray-600 rounded transition"
-            disabled
-            >Next Person</button> : null}
+                {personIndex !== 0 ? <button className="border m-5 p-1 hover:bg-yellow-900 rounded transition"
+                    onClick={decrementPersonIndex}
+                >	Previous Person</button> : null}
+
+                {personIndex !== people.peopleData.length - 1 ? ((problematic === true && reason && reason.length > 0) || problematic === false) ? <button className="border m-5 p-1 hover:bg-green-900 rounded transition"
+                    onClick={incrementPersonIndex}
+                >Next Person</button> : <button className="border m-5 p-1 bg-gray-600 rounded transition"
+                    disabled
+                >Next Person</button> : null}
 
             </div>
         </div>

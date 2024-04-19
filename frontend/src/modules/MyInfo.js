@@ -1,6 +1,6 @@
-import { useState } from "react";
+// Simple form that allows the user to enter their age.
 
-function MyInfo({age}) {
+function MyInfo({ age }) {
     return (
 
         <div className="container-md mx-8 p-5 text-center rounded flex flex-col border justify-center my-5 py-5 text-white text-xl">
