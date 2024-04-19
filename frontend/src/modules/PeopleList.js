@@ -2,7 +2,7 @@ function PeopleList({ people, submitForm }) {
 
     const removePerson = (index) => {
         let tempArr = [...people.peopleData];
-        tempArr.splice(index)
+        tempArr.splice(index,1)
         people.setPeopleData(tempArr);
         }
 

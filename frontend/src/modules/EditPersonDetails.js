@@ -17,21 +17,20 @@ function EditPersonDetails({ people }) {
         let temp = [...people.peopleData];
         temp[personIndex].problematic = e.target.value;
         people.setPeopleData(temp);
-        // checkProblematic();
     }
 
-    const checkProblematic = () => {
-        if(people && people.peopleData[personIndex].problematic === "yes")
-            setProblematic(true);
-        else if (people && people.peopleData[personIndex].problematic === "no")
-            setProblematic(false);
+    const changeProblemReason = (e) => {
+        setReason(e.target.value);
+        let temp = [...people.peopleData];
+        temp[personIndex].reason = e.target.value;
+        people.setPeopleData(temp);
+
     }
-    
 
     useEffect(() => {
-        // Update problematic state based on the problematic property of the current person
         if (people && people.peopleData[personIndex]) {
             setProblematic(people.peopleData[personIndex].problematic === "yes");
+            setReason(people.peopleData[personIndex].reason);
         }
     }, [personIndex, people]);
 
@@ -41,7 +40,6 @@ function EditPersonDetails({ people }) {
         if( people && personIndex < people.peopleData.length - 1 && people.peopleData[personIndex].problematic){
             setPersonIndex(personIndex + 1);
         }
-        checkProblematic();
     }
 
     const decrementPersonIndex = (e) => {
@@ -50,10 +48,7 @@ function EditPersonDetails({ people }) {
         if( people && personIndex > 0){
             setPersonIndex(personIndex - 1);
         }
-        checkProblematic();
     }
-
-    // console.log(people.peopleData);
 
     return (
         <div className="container-md mx-8 p-5 text-center rounded flex flex-col border justify-center my-5 py-5 text-white text-xl">
@@ -80,7 +75,7 @@ function EditPersonDetails({ people }) {
 
                 {people && people.peopleData[personIndex].problematic === "yes" ? <div className="m-5">
                     <label htmlFor="reason">What kind?</label><br />
-                    <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={e => setReason(e.target.value)} /><br />
+                    <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={changeProblemReason} /><br />
                 </div> : null}
 
                 </div>
