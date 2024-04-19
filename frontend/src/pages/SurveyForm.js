@@ -30,6 +30,7 @@ function SurveyForm() {
   // Three states for data submission; filling, submitting, finished -- assists with situations where data is loading
   const [submitting, setSubmitting] = useState("filling");
 
+  const [errorMessages, setErrorMessages] = useState([]);
   const [age, setAge] = useState("");
   const [peopleData, setPeopleData] = useState([]);
   const [stage, setStage] = useState(1);
@@ -55,9 +56,9 @@ function SurveyForm() {
         {
           submitting === "filling" ?
             <div className='container-md mx-8 p-5 rounded flex flex-col grid grid-cols-4 justify-center my-5 py-5 text-white text-xl'>
-              {stage === 1 ? <div className="col-span-4"><MyInfo age={{ age, setAge }} /></div> : null}
-              {stage === 2 ? <div className="col-span-4"><AddPerson people={{ peopleData, setPeopleData }} /></div> : null}
-              {stage === 3 ? <div className="col-span-4"><EditPersonDetails people={{ peopleData, setPeopleData }} /></div> : null}
+              {stage === 1 ? <div className="col-span-4"><MyInfo age={{ age, setAge }} errorList={{errorMessages, setErrorMessages}} /></div> : null}
+              {stage === 2 ? <div className="col-span-4"><AddPerson people={{ peopleData, setPeopleData }} errorList={{errorMessages, setErrorMessages}} /></div> : null}
+              {stage === 3 ? <div className="col-span-4"><EditPersonDetails people={{ peopleData, setPeopleData }} errorList={{errorMessages, setErrorMessages}} /></div> : null}
               {stage === 4 ? <div className="col-span-4"><PeopleList people={{ peopleData, setPeopleData }} submitForm={submitForm} /></div> : null}
               {stage > 1 ? <button className="border col-span-2 m-5 p-1 hover:bg-orange-900 rounded transition" onClick={prevButton}> Back </button> : null}
               <button className="border col-span-2 m-5 p-1 hover:bg-green-900 rounded transition" onClick={nextButton}>Next</button>

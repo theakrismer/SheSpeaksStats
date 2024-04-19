@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
+import { ErrorDisplay } from "./ErrorDisplay";
 
-function EditPersonDetails({ people }) {
+function EditPersonDetails({ people, errorList }) {
 
     const [personIndex, setPersonIndex] = useState(0);
     const [reason, setReason] = useState("");
     const [problematic, setProblematic] = useState(undefined);
-
-    // Future error handling implementation
-    // const [error, setError] = useState("");
-    // Stub: future error handling
-    // const handleError = () => {
-    //     setError("");
-    //     console.log(error);
-    // }
 
     // Change peopleData when problematic is updated
     const changeProblematic = (e) => {
@@ -67,6 +60,7 @@ function EditPersonDetails({ people }) {
             <div className="p-3 w-8/12 text-center self-center">
                 <p>Now, think carefully about each man you entered before.</p><br /><p>Consider and list any problematic behavior you have since from this individual.</p>
                 <br />
+                <ErrorDisplay/>
                 <hr />
             </div>
             <form>

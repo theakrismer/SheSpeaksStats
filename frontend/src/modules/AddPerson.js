@@ -1,8 +1,9 @@
 import { useState } from "react";
 import PeopleListLight from "./PeopleListLight";
 import { getGroupDisplayName } from "../pages/SurveyForm";
+import { ErrorDisplay } from "./ErrorDisplay";
 
-function AddPerson({ people }) {
+function AddPerson({ people, errorList }) {
 
     const [nickname, setNickname] = useState("");
     const [group, setGroup] = useState("family");
@@ -38,6 +39,7 @@ function AddPerson({ people }) {
             <div className="p-3 w-8/12 text-center self-center">
                 <p>In this step, identify all the men you know and their relationship to you.</p><br /><p>Try to be as complete as possible, adding everyone you can think of.</p>
                 <br />
+                <ErrorDisplay/>
                 <hr />
             </div>
             <form onSubmit={handleSubmit}>
