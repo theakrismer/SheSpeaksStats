@@ -7,20 +7,15 @@ function AddPerson({ people }) {
 
     const [nickname, setNickname] = useState("");
     const [group, setGroup] = useState("family");
-    // const [problematic, setProblematic] = useState(null);
-    // const [reason, setReason] = useState("");
-    // const [stage, setStage] = useState(1);
     const [error, setError] = useState("");
 
+    // Set error messages
     const handleError = () => {
-
         setError("");
-        //     if (stage == 4 && reason === "") { setError("Please provide a reason.") }
-        //     if (stage == 1 && nickname === "") { setError("Please provide a reason.") }
-        //     if (stage == 3 && problematic === null) setError("Please select an option.")
         if (nickname === "") { setError("Please enter a nickname.") }
     }
 
+    // Helper function, returns the human readable format of a group
     const getGroupDisplayName = (group) => {
         let displayName;
         GROUPS.forEach(element => {
@@ -30,48 +25,23 @@ function AddPerson({ people }) {
         return displayName;
     }
 
-
+    // Add the initial person to peopleData
     const handleSubmit = (e) => {
         e.preventDefault();
         handleError();
         if (error !== "" || nickname === "") return
         else{
             const groupDisplayName = getGroupDisplayName(group);
-
             people.setPeopleData([...people.peopleData,
             {
                 "group": group,
-                // "problematic": problematic === "yes",
-                // "reason": reason,
                 "nickname": nickname,
                 "groupDisplayName": groupDisplayName
             }
             ])
             setNickname("");
-            //setGroup("family"); // reset back to default
         }
-
-        
-        // setProblematic(null);
-        // setReason("");
-        // setStage(1);
     }
-
-    // const nextButton = (e) => {
-    //     e.preventDefault();
-    //     handleError();
-    //     if (stage === 1 && nickname !== "")
-    //         setStage(stage + 1);
-    //     if (stage === 2 && group !== "")
-    //         setStage(stage + 1);
-
-    //     if (stage === 3 && problematic !== null)
-    //         setStage(stage + 1);
-    // }
-    // const prevButton = (e) => {
-    //     e.preventDefault();
-    //     setStage(stage - 1);
-    // }
 
     return (
         <div className="container-md mx-8 p-5 text-center rounded flex flex-col border justify-center my-5 py-5 text-white text-xl">
@@ -106,45 +76,6 @@ function AddPerson({ people }) {
 
                 <input className="border m-5 p-1 hover:bg-green-900 rounded transition" type="submit" value="Add Person" />
                 <PeopleListLight people={people}/>
-
-
-                {
-                    //     stage === 3 ? (
-                    //         <div>
-                    //         <label>Has this man exhibted problematic behavior of any kind?</label><br />
-
-                    //         <span className="mx-5"><label htmlFor="problematic_no">No </label> 
-                    //         <input type="radio" onChange={e => setProblematic(e.target.value)} value="no" id="problematic_no" name="problematic_no" checked={problematic==="no"} />
-                    //         </span>
-
-                    //         <span className="mx-5"><label htmlFor="problematic_yes">Yes </label>
-                    //         <input type="radio" onChange={e => setProblematic(e.target.value)} value="yes" id="problematic_yes" name="problematic_yes" checked={problematic==="yes"} />
-                    //         </span>
-                    //     </div>
-                    //     ) : null
-                    // }
-                    // {stage === 4 ? (
-                    //     <div>
-                    //     <label htmlFor="reason">What sort of problematic behavior?</label><br />
-                    //     <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={e => setReason(e.target.value)} /><br />
-                    // </div>
-                    // )
-                    // :null}
-
-                    //     <div>
-                    //     {stage !== 1 ? <button className="border m-5 p-1 hover:bg-green-900 rounded transition" onClick={prevButton}> Back </button> : null}
-                    //         {stage !== 4 && !(problematic === "no" && stage === 3) ? (   
-                    //         <button className="border m-5 p-1 hover:bg-green-900 rounded transition" onClick={nextButton}>Next</button>
-                    //         ) :
-                    //         <input className="border m-5 p-1 hover:bg-green-900 rounded transition" type="submit" value="Add Person"/>
-                    //     }
-
-                    //     </div>
-
-                    // <div>
-                    //     <p className="text-sm italic text-red-600">{error}</p>
-                    // </div>
-                }
 
             </form>
         </div>
