@@ -60,7 +60,7 @@ function EditPersonDetails({ people, errorList }) {
             <div className="p-3 w-8/12 text-center self-center">
                 <p>Now, think carefully about each man you entered before.</p><br /><p>Consider and list any problematic behavior you have since from this individual.</p>
                 <br />
-                <ErrorDisplay/>
+                <ErrorDisplay errorList={errorList}/>
                 <hr />
             </div>
             <form>

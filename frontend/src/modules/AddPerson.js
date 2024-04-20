@@ -39,7 +39,7 @@ function AddPerson({ people, errorList }) {
             <div className="p-3 w-8/12 text-center self-center">
                 <p>In this step, identify all the men you know and their relationship to you.</p><br /><p>Try to be as complete as possible, adding everyone you can think of.</p>
                 <br />
-                <ErrorDisplay/>
+                <ErrorDisplay errorList={errorList}/>
                 <hr />
             </div>
             <form onSubmit={handleSubmit}>

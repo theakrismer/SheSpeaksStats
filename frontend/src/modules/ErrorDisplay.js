@@ -4,8 +4,8 @@ function ErrorDisplay({errorList}) {
 
     return (
         <div>
-            {errorList.errorMessages.map((msg) => (
-                <p className="text-red-500 italic">{msg}</p>
+            {errorList.errorMessages.map((msg, index) => (
+                <p className="text-red-500 italic">{index + 1 + ": " + msg}</p>
             ))}
         </div>
     )
