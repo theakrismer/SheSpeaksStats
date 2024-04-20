@@ -36,7 +36,7 @@ function EditPersonDetails({ people, errorList }) {
         }
     }, [personIndex, people]);
 
-    // Increment the person being edited
+    // Go to the next the person to be edited
     const incrementPersonIndex = (e) => {
         e.preventDefault();
         if (people && personIndex < people.peopleData.length - 1 && people.peopleData[personIndex].problematic) {
@@ -45,7 +45,7 @@ function EditPersonDetails({ people, errorList }) {
         }
     }
 
-    // Decrement the person being edited
+    // Go to the previous person to be edit
     const decrementPersonIndex = (e) => {
         e.preventDefault();
         if (people && personIndex > 0) {

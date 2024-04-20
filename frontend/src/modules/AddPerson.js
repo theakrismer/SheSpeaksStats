@@ -9,17 +9,15 @@ function AddPerson({ people, errorList }) {
     const [group, setGroup] = useState("family");
     const [error, setError] = useState("");
 
-    // Set error messages
-    const handleError = () => {
-        setError("");
-        if (nickname === "") { setError("Please enter a nickname.") }
-    }
-
     // Add the initial person to peopleData
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleError();
-        if (error !== "" || nickname === "") return
+        // Show an error if no nickname entered
+        errorList.setErrorMessages([]);
+        if (nickname === "") {
+            errorList.setError("Please enter a nickname.");
+            return;
+        }
         else {
             const groupDisplayName = getGroupDisplayName(group);
             people.setPeopleData([...people.peopleData,
@@ -39,7 +37,7 @@ function AddPerson({ people, errorList }) {
             <div className="p-3 w-8/12 text-center self-center">
                 <p>In this step, identify all the men you know and their relationship to you.</p><br /><p>Try to be as complete as possible, adding everyone you can think of.</p>
                 <br />
-                <ErrorDisplay errorList={errorList}/>
+                <ErrorDisplay errorList={errorList} />
                 <hr />
             </div>
             <form onSubmit={handleSubmit}>

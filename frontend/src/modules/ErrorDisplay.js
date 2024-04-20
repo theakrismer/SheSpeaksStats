@@ -5,7 +5,7 @@ function ErrorDisplay({errorList}) {
     return (
         <div>
             {errorList.errorMessages.map((msg, index) => (
-                <p className="text-red-500 italic">{index + 1 + ": " + msg}</p>
+                <p key={msg+index} className="text-red-500 text-base italic">{ "Error: " + msg}</p>
             ))}
         </div>
     )
