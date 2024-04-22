@@ -23,7 +23,7 @@ const getGroupDisplayName = (group) => {
 function SurveyForm() {
 
   const submitForm = () => {
-    axios.post(API_URL + '/submissions', { "men": peopleData }).then(setSubmitting("submitting")).finally(setSubmitting("finished"));
+    axios.post(API_URL + '/submissions', { "men": peopleData, "submission": {"age":age, "men":peopleData} }).then(setSubmitting("submitting")).finally(setSubmitting("finished"));
   }
 
 

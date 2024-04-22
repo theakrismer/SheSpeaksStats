@@ -9,7 +9,9 @@ const addNewSubmission = async (req, res) => {
     try {
       let menArray = req.body.men;
       let subInfo = req.body.submission;
+      console.log(subInfo);
       await personModel.insertMany(menArray);
+      // await formModel.insert(subInfo)
 
       res.status(201).send(req.body);
     } catch (err) {

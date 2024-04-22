@@ -17,6 +17,14 @@ const manSchema = new mongoose.Schema({
     reason: {
         type: String,
         required: false
+    },
+    frequency: {
+        type: String,
+        required: false
+    },
+    intensity: {
+        type: String,
+        required: false
     }
 })
 
