@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const personModel = mongoose.model("person");
+const formModel = mongoose.model("form");
 
 // Returns the percent of problematic men, in decimal format.
 // Optional :group parameter
@@ -69,6 +70,16 @@ const getGroupsOverview = async (req, res) => {
   }
 };
 
+const getMostTargetedAge = async (req,res) => {
+
+}
+
+const getMenByVictimAge = async (req,res) => {
+  let allGroup;
+  allGroup = await formModel.find({"age":req.params.age});
+  res.status(200).json({allGroup});
+}
+
 const getGroupStatistics = async (groupName) =>{
     
     let allGroup;
@@ -113,4 +124,4 @@ const getGroupStatistics = async (groupName) =>{
   };
 
 
-  export { getProblematicPercent, getTotalMen, getTotalProblematicMen, getGroupsOverview }
+  export { getProblematicPercent, getTotalMen, getTotalProblematicMen, getGroupsOverview, getMenByVictimAge }

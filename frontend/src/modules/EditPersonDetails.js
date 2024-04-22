@@ -6,13 +6,20 @@ function EditPersonDetails({ people, errorList }) {
     const [personIndex, setPersonIndex] = useState(0);
     const [reason, setReason] = useState("");
     const [problematic, setProblematic] = useState(undefined);
-    const [frequency, setFrequency] = useState("");
-    const [intensity, setIntensity] = useState("");
+    const [frequency, setFrequency] = useState("rarely");
+    const [intensity, setIntensity] = useState("very mild");
 
     // Change peopleData when problematic is updated
     const changeProblematic = (e) => {
         setProblematic(e.target.value === "yes");
         let temp = [...people.peopleData];
+
+        // Set default values for frequency and intesnity.
+        if(e.target.value === "yes"){
+            temp[personIndex].frequency = "rarely";
+            temp[personIndex].intensity = "very mild";
+        }
+        
         temp[personIndex].problematic = e.target.value;
         people.setPeopleData(temp);
     }
