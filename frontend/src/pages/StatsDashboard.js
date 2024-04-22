@@ -3,6 +3,7 @@ import { API_URL } from '../index.js'
 function StatsDashboard({ page }) {
 
   const [totalMen, setTotalMen] = useState();
+  const [mostTagetedAge, setMostTargetedAge] = useState();
   const [problemPercent, setProblemPercent] = useState();
 
   // Totals
@@ -14,15 +15,16 @@ function StatsDashboard({ page }) {
 
   const getStats = () => {
     const p1 = fetch(API_URL + "/stats/total-men").then(res => res.json()).then(data => setTotalMen(data));
-    const p2 = fetch(API_URL + "/stats/problematic-percent").then(res => res.json()).then(data => setProblemPercent(data));
-    const p3 = fetch(API_URL + "/stats/total-problematic-men").then(res => res.json()).then(data => setTotalProblematic(data));
-    const p4 =fetch(API_URL + "/stats/groups-overview").then(res => res.json()).then(data => {
+    const p2 = fetch(API_URL + "/stats/most-targeted-age").then(res => res.json()).then(data => setMostTargetedAge(data));
+    const p3 = fetch(API_URL + "/stats/problematic-percent").then(res => res.json()).then(data => setProblemPercent(data));
+    const p4 = fetch(API_URL + "/stats/total-problematic-men").then(res => res.json()).then(data => setTotalProblematic(data));
+    const p5 =fetch(API_URL + "/stats/groups-overview").then(res => res.json()).then(data => {
       setGroupsOverview(data);
       for (const [key, value] of Object.entries(data)) {
         if (value.mostProblematic == true) { setLargestProblematicGroup(value); }
       }
     })
-    Promise.all([p1,p2,p3,p4]).then((values) => {
+    Promise.all([p1,p2,p3,p4,p5]).then((values) => {
       setIsLoading(setIsLoading(false));
     })
   }
@@ -58,8 +60,7 @@ function StatsDashboard({ page }) {
 
 { isLoading ? <p>Loading . . .</p> :
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
-      <p>Of all <span className='text-3xl italic'>{totalMen}</span> men tallied...</p>
-      <p><span className='text-3xl italic'>{(problemPercent * 100).toFixed(2)}%</span> <span className='text-sm'>({totalProblematic})</span> exhibited negative behaviour. </p>
+      <p> Respondents <span className='text-3xl italic'>{mostTagetedAge.age} </span> years old were most at risk, reporting <span className='text-3xl italic'>{(mostTagetedAge.percent * 100).toFixed(2)}%</span> of men they knew exhibited problematic behaviour.</p>
     </div>}
 
   </>

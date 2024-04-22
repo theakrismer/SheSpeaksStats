@@ -72,12 +72,77 @@ const getGroupsOverview = async (req, res) => {
 
 const getMostTargetedAge = async (req,res) => {
 
+  let allGroup;
+  allGroup = await formModel.find({}).sort({age:-1});
+  let current_age = -1;
+  let group_data = {};
+
+  let totalMen = 0;
+  let totalProblematicMen = 0;
+  allGroup.forEach((submission)=>{
+    
+
+    // Reset counters when entering new age group
+    if (!submission.age || current_age === -1 || submission.age < current_age) {
+
+      
+      if(current_age !== -1 && current_age != undefined){
+        group_data[current_age] = {
+          "age": current_age,
+          "totalMen": totalMen,
+          "totalProblematicMen": totalProblematicMen,
+          "percentProblematic": totalProblematicMen/totalMen
+        };
+      }
+
+      current_age = submission.age;
+      totalMen = 0;
+      totalProblematicMen = 0;
+    }
+
+    totalMen += submission.men.length;
+    submission.men.forEach((man)=>{
+      if (man.problematic === true) totalProblematicMen++;
+    })
+
+
+  })
+
+  let worstAge;
+  let worstPercent;
+  
+  for (var cAge in group_data) {
+    if(worstAge === undefined || worstPercent === undefined || group_data[cAge].worstPercent > worstPercent) {
+      worstAge = group_data[cAge].age;
+      worstPercent = group_data[cAge].percentProblematic
+    }
+  }
+  res.status(200).json({"age": worstAge, "percent": worstPercent});
 }
 
-const getMenByVictimAge = async (req,res) => {
+const getPercentProblematicByVictimAge = async (req,res) => {
+  let results = await getMenByVictimAge(req.params.age);
+  res.status(200).json(results);
+}
+
+const getMenByVictimAge = async (age) => {
   let allGroup;
-  allGroup = await formModel.find({"age":req.params.age});
-  res.status(200).json({allGroup});
+  allGroup = await formModel.find({"age":age});
+  let totalProblematicMen = 0;
+  let totalMen = 0;
+  let percentProblematic = 0;
+
+  allGroup.forEach((submission, sub_index)=>{
+    totalMen = totalMen + submission.men.length;
+    submission.men.forEach(man => {
+      if(man.problematic === true){
+        totalProblematicMen++;
+      }
+    })
+  })
+
+  percentProblematic = totalProblematicMen / totalMen; 
+  return {"totalMen": totalMen, "problematicMen": totalProblematicMen, "percentage": percentProblematic};
 }
 
 const getGroupStatistics = async (groupName) =>{
@@ -124,4 +189,4 @@ const getGroupStatistics = async (groupName) =>{
   };
 
 
-  export { getProblematicPercent, getTotalMen, getTotalProblematicMen, getGroupsOverview, getMenByVictimAge }
+  export { getProblematicPercent, getTotalMen, getTotalProblematicMen, getGroupsOverview, getPercentProblematicByVictimAge, getMostTargetedAge }
