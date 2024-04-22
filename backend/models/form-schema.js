@@ -1,14 +1,13 @@
 import mongoose from 'mongoose';
 
 // Specifies an individual man
-const manSchema = new mongoose.Schema({
-    firstname: {
+// This is duplicate code, also written in person-schema.js
+// To-Do: remove this code and figure out how to import this from person-schema.js
+// Both must be updated at present!
+const personSchema = new mongoose.Schema({
+    group: {
         type: String,
         required: true,
-        trim: true,
-        minLength: 1,
-        maxLength: 15,
-        match: /^[A-Za-z]+$/
     },
     problematic: {
         type: Boolean,
@@ -28,34 +27,9 @@ const manSchema = new mongoose.Schema({
     }
 })
 
-// Specifies a group of men - ex. family
-const groupSchema = new mongoose.Schema({
-    men: {
-        type: [manSchema]
-    }
-})
-
 const formSchema = new mongoose.Schema({
-    family: {
-        type: groupSchema,
-        required: false
-    },
-    extendedfamily: {
-        type: groupSchema,
-        required: false
-    },
-    closefriends: {
-        type: groupSchema,
-        required: false
-    },
-    friends: {
-        type: groupSchema,
-        required: false
-    },
-    acquaintances: {
-        type: groupSchema,
-        required: false
-    } 
+    age: Number,
+    men: [personSchema]
 });
 
 formSchema.set('toJSON', {

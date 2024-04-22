@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 // Specifies an individual man
+// Both copies of thids code must be updated at present! See note in form-schema
 const personSchema = new mongoose.Schema({
     group: {
         type: String,
@@ -22,7 +23,6 @@ const personSchema = new mongoose.Schema({
         type: String,
         required: false
     }
-
 })
 
 personSchema.set('toJSON', {
