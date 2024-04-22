@@ -21,7 +21,7 @@ function PeopleList({ people, submitForm }) {
                         <p className="mr-10 text-red-600 cursor-pointer font-bold" onClick={e => removePerson(people, index)}>X</p>
                         <div>
                             <p className="text-lg italic">{person.nickname}</p>
-                            {person.problematic ? <p className="text-sm italic">Problematic: {person.reason}</p> : <p className="text-sm italic">Safe</p>}
+                            {person.problematic === "yes" ? <p className="text-sm italic">Problematic: {person.reason}</p> : <p className="text-sm italic">Safe</p>}
                         </div>
                     </div>
                 ) : null
