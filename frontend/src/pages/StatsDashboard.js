@@ -34,7 +34,7 @@ function StatsDashboard({ page }) {
   }, [])
 
   return (<>
-  { isLoading ? <p>Loading . . .</p> :
+  { isLoading ? <div className='my-10 text-white text-center'><p>Loading . . .</p> </div>:
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       <p>Of all <span className='text-3xl italic'>{totalMen}</span> men tallied...</p>
       <p><span className='text-3xl italic'>{(problemPercent * 100).toFixed(2)}%</span> <span className='text-sm'>({totalProblematic})</span> exhibited negative behaviour. </p>

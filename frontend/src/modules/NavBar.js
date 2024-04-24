@@ -8,7 +8,7 @@ function NavBar({ page }) {
             </button>
             <button
             onClick={() => page.setActivePage("survey")} 
-            className={`border-2 ${page.activePage === "survey" ? "border-white cursor-default" : "border-transparent hover:border-white transition cursor-pointer"} p-2 rounded`}>Take the Survey</button>
+            className={`border-2 ${page.activePage === "survey" ? "border-white cursor-default" : "border-transparent hover:border-white transition cursor-pointer"} p-2 rounded`}>Our Tool</button>
             <button
             onClick={() => page.setActivePage("ourproject")} 
             className={`border-2 ${page.activePage === "ourproject" ? "border-white cursor-default" : "border-transparent hover:border-white transition cursor-pointer"} p-2 rounded`}>This Project</button>
