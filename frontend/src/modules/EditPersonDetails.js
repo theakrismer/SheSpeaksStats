@@ -6,11 +6,20 @@ function EditPersonDetails({ people, errorList }) {
     const [personIndex, setPersonIndex] = useState(0);
     const [reason, setReason] = useState("");
     const [problematic, setProblematic] = useState(undefined);
+    const [frequency, setFrequency] = useState("rarely");
+    const [intensity, setIntensity] = useState("very mild");
 
     // Change peopleData when problematic is updated
     const changeProblematic = (e) => {
         setProblematic(e.target.value === "yes");
         let temp = [...people.peopleData];
+
+        // Set default values for frequency and intesnity.
+        if(e.target.value === "yes"){
+            temp[personIndex].frequency = "rarely";
+            temp[personIndex].intensity = "very mild";
+        }
+        
         temp[personIndex].problematic = e.target.value;
         people.setPeopleData(temp);
     }
@@ -20,6 +29,24 @@ function EditPersonDetails({ people, errorList }) {
         setReason(e.target.value);
         let temp = [...people.peopleData];
         temp[personIndex].reason = e.target.value;
+        people.setPeopleData(temp);
+
+    }
+    
+    // Change peopleData when the frequency is updated
+    const changeProblemFrequency = (e) => {
+        setFrequency(e.target.value);
+        let temp = [...people.peopleData];
+        temp[personIndex].frequency = e.target.value;
+        people.setPeopleData(temp);
+
+    }
+    
+    // Change peopleData when the intensity is updated
+    const changeProblemIntensity = (e) => {
+        setIntensity(e.target.value);
+        let temp = [...people.peopleData];
+        temp[personIndex].intensity = e.target.value;
         people.setPeopleData(temp);
 
     }
@@ -33,6 +60,8 @@ function EditPersonDetails({ people, errorList }) {
             }
 
             setReason(people.peopleData[personIndex].reason);
+            setFrequency(people.peopleData[personIndex].frequency);
+            setIntensity(people.peopleData[personIndex].intensity);
         }
     }, [personIndex, people]);
 
@@ -60,7 +89,7 @@ function EditPersonDetails({ people, errorList }) {
             <div className="p-3 w-8/12 text-center self-center">
                 <p>Now, think carefully about each man you entered before.</p><br /><p>Consider and list any problematic behavior you have since from this individual.</p>
                 <br />
-                <ErrorDisplay errorList={errorList}/>
+                <ErrorDisplay errorList={errorList} />
                 <hr />
             </div>
             <form>
@@ -79,8 +108,35 @@ function EditPersonDetails({ people, errorList }) {
                     </div>
 
                     {people && people.peopleData[personIndex].problematic === "yes" ? <div className="m-5">
-                        <label htmlFor="reason">What kind?</label><br />
-                        <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={changeProblemReason} /><br />
+                        <div className="flex justify-between">
+                            <div>
+                                <label htmlFor="reason">What kind?</label><br />
+                                <input className="bg-gray-700 p-1 m-2" type="text" id="reason" name="reason" value={reason} onChange={changeProblemReason} /><br />
+
+                            </div>
+
+                            <div>
+                                <label htmlFor="group">Frequency</label><br />
+                                <select className="bg-transparent border-b-4 focus:outline-none" name="frequency" id="frequency" value={frequency} onChange={changeProblemFrequency}>
+                                    <option className="bg-gray-700" value="rarely">Rarely</option>
+                                    <option className="bg-gray-700" value="yearly">A few times per year</option>
+                                    <option className="bg-gray-700" value="monthly">A few times per month</option>
+                                    <option className="bg-gray-700" value="weekly">A few times per week</option>
+                                    <option className="bg-gray-700" value="daily">Daily</option>
+                                </select><br />
+                            </div>
+
+                            <div>
+                                <label htmlFor="group">Intensity</label><br />
+                                <select className="bg-transparent border-b-4 focus:outline-none" name="intensity" id="intensity" value={intensity} onChange={changeProblemIntensity}>
+                                    <option className="bg-gray-700" value="very mild">Very Mild</option>
+                                    <option className="bg-gray-700" value="mild">Mild</option>
+                                    <option className="bg-gray-700" value="moderate">Moderate</option>
+                                    <option className="bg-gray-700" value="bad">Bad</option>
+                                    <option className="bg-gray-700" value="very bad">Very Bad</option>
+                                </select><br />
+                            </div>
+                        </div>
                     </div> : null}
 
                 </div>
