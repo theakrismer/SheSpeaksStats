@@ -8,11 +8,14 @@ const personModel = mongoose.model("person")
 const addNewSubmission = async (req, res) => {
     try {
       let menArray = req.body.men;
+      let subInfo = req.body.submission;
       await personModel.insertMany(menArray);
+      await formModel.create(subInfo)
 
       res.status(201).send(req.body);
     } catch (err) {
       console.log(req.body);
+      console.log(err);
       res.status(400).send(
         "Bad Request. The message in the body of the \
           Request is either missing or malformed."
