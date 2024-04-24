@@ -58,6 +58,7 @@ function StatsDashboard({ page }) {
     </div>
     }
 
+
 { isLoading ? <p>Loading . . .</p> :
     <div className='container-md mx-40 p-5 rounded text-center flex flex-col border justify-center my-5 py-5 text-white text-xl'>
       <p> Respondents <span className='text-3xl italic'>{mostTagetedAge.age} </span> years old were most at risk, reporting <span className='text-3xl italic'>{(mostTagetedAge.percent * 100).toFixed(2)}%</span> of men they knew exhibited problematic behaviour.</p>
