@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 
 // connect to locally running MongoDB instance
-let dbURI = 'mongodb://localhost:27017/userData'; //process.env.ATLAS_URI;
+//let dbURI = 'mongodb://localhost:27017/userData';   // Local host database
+let dbURI = process.env.ATLAS_URI;                  // Remote atlas PRD database
+
 mongoose.set('strictQuery', true);
 mongoose.connect(dbURI);
 
