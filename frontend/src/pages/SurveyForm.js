@@ -29,11 +29,11 @@ function SurveyForm() {
 
   // Three states for data submission; filling, submitting, finished -- assists with situations where data is loading
   const [submitting, setSubmitting] = useState("filling");
-
   const [errorMessages, setErrorMessages] = useState([]);
   const [age, setAge] = useState("");
   const [peopleData, setPeopleData] = useState([]);
   const [stage, setStage] = useState(1);
+  const FINAL_STAGE = 4;
 
   // Adds an error to the display
   const setError = (msg) => {
@@ -46,6 +46,9 @@ function SurveyForm() {
   const nextButton = (e) => {
     e.preventDefault();
     setErrorMessages([]);
+
+    // 
+    if (stage === FINAL_STAGE) return;
 
     // handle no age being inputted correctly
     if (stage === 1 && (age === null || age === "")) {
@@ -91,7 +94,7 @@ function SurveyForm() {
               {stage === 3 ? <div className="col-span-4"><EditPersonDetails people={{ peopleData, setPeopleData }} errorList={{ errorMessages, setErrorMessages, setError }} /></div> : null}
               {stage === 4 ? <div className="col-span-4"><PeopleList people={{ peopleData, setPeopleData }} submitForm={submitForm} /></div> : null}
               {stage > 1 ? <button className="border col-span-2 m-5 p-1 hover:bg-orange-900 rounded transition" onClick={prevButton}> Back </button> : null}
-              <button className="border col-span-2 m-5 p-1 hover:bg-green-900 rounded transition" onClick={nextButton}>Next</button>
+              {stage !== FINAL_STAGE ? <button className="border col-span-2 m-5 p-1 hover:bg-green-900 rounded transition" onClick={nextButton}>Next</button> : null}
             </div> : null
         }
         {
