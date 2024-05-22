@@ -112,7 +112,6 @@ const getMostTargetedAge = async (req, res) => {
     let worstAge = 0;
     let worstPercent = 0;
     for (let cAge in group_data) {
-      console.log("Age: " + group_data[cAge].age + " - Percent: " + group_data[cAge].percentProblematic);
       if (worstAge === 0 || worstPercent === 0 || group_data[cAge].worstPercent > worstPercent) {
         worstAge = group_data[cAge].age;
         worstPercent = group_data[cAge].percentProblematic;
