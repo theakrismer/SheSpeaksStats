@@ -7,6 +7,16 @@ const removePerson = (people, index) => {
     people.setPeopleData(tempArr);
 }
 
+// Helper function, determins if a group has anyone in it
+const isGroupEmpty = (people, groupName) =>{
+    let groupEmpty = true;
+    people.forEach(person => {
+        if(person.group === groupName) 
+            groupEmpty = false;
+    });
+    return groupEmpty;
+}
+
 // Full featured display of all people
 
 function PeopleList({ people, submitForm }) {
@@ -14,17 +24,23 @@ function PeopleList({ people, submitForm }) {
     // Sub-componant, displays people for each relationship group
     const renderPeople = (group) => (
         <div key={group.id}>
-            <p className="text-2xl font-bold">{group.displayname}</p>
-            {people.peopleData.map((person, index) => (
-                person.group === group.id ? (
+            
+            {!isGroupEmpty(people.peopleData, group.id) ? <p className="text-2xl font-bold">{group.displayname}</p> : null}
+            {people.peopleData.map((person, index) => {
+                return(
+                    <>
+                    {person.group === group.id ? (
                     <div className={`border-r-4 ${person.problematic === "yes" ? "border-yellow-500" : "border-green-500"} my-3 flex flex-row items-center text-justify`} key={person.nickname + person.group + person.reason}>
                         <div>
                             <p className="text-lg italic">{person.nickname}</p>
                             {person.problematic === "yes" ? <p className="text-sm italic">Problematic: {person.reason}</p> : <p className="text-sm italic">Safe</p>}
                         </div>
                     </div>
-                ) : null
-            ))}
+                ) : null}
+                    </>
+                )
+                
+                })}
         </div>
     )
 
