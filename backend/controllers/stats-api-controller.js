@@ -79,37 +79,42 @@ const getMostTargetedAge = async (req, res) => {
     let group_data = {};
     let totalMen = 0;
     let totalProblematicMen = 0;
-    allGroup.forEach((submission) => {
+    allGroup.forEach((submission, index) => {
 
-      // Reset counters when entering new age group
-      if (!submission.age || current_age === -1 || submission.age < current_age) {
 
-        if (current_age !== -1 && current_age != undefined) {
+      // Skip submission if there is no age associated with this submission
+      if (submission.age == undefined) return;
+
+      // Add up total men and problematic men for this age group
+      totalMen += submission.men.length;
+      submission.men.forEach((man) => {
+        if (man.problematic === true) totalProblematicMen++;
+      })
+
+      // Set the current age to the submission age
+      current_age = submission.age;
+
+      // Reset counters when entering new age group, or if in final submission
+      if (index == allGroup.length-1 || allGroup[index+1].age !== current_age) {
           group_data[current_age] = {
             "age": current_age,
             "totalMen": totalMen,
             "totalProblematicMen": totalProblematicMen,
             "percentProblematic": totalProblematicMen / totalMen
           };
-        }
-
-        current_age = submission.age;
         totalMen = 0;
         totalProblematicMen = 0;
       }
 
-      totalMen += submission.men.length;
-      submission.men.forEach((man) => {
-        if (man.problematic === true) totalProblematicMen++;
-      })
     })
 
-    let worstAge;
-    let worstPercent;
-    for (var cAge in group_data) {
-      if (worstAge === undefined || worstPercent === undefined || group_data[cAge].worstPercent > worstPercent) {
+    // Calculate the age group with the largest percent of problematic men
+    let worstAge = 0;
+    let worstPercent = 0;
+    for (let cAge in group_data) {
+      if (worstAge === 0 || worstPercent === 0 || group_data[cAge].worstPercent > worstPercent) {
         worstAge = group_data[cAge].age;
-        worstPercent = group_data[cAge].percentProblematic
+        worstPercent = group_data[cAge].percentProblematic;
       }
     }
     res.status(200).json({ "age": worstAge, "percent": worstPercent });

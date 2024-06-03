@@ -85,7 +85,7 @@ function EditPersonDetails({ people, errorList }) {
 
     return (
         <div className="container-md mx-8 p-5 text-center rounded flex flex-col border justify-center my-5 py-5 text-white text-xl">
-            <p className="text-3xl my-5 font-bold italic">Review</p>
+            <p className="text-3xl my-5 font-bold italic">Identify Behavior</p>
             <div className="p-3 w-8/12 text-center self-center">
                 <p>Now, think carefully about each man you entered before.</p><br /><p>Consider and list any problematic behavior you have since from this individual.</p>
                 <br />
